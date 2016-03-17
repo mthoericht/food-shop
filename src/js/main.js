@@ -64,7 +64,7 @@ App.View.Item = Backbone.View.extend(
 
 	events:
 	{
-		'click':'addToCart'
+		'click .btnAddToCart' : 'addToCart'
 	},
 
 	initialize: function()
@@ -81,7 +81,7 @@ App.View.Item = Backbone.View.extend(
 	//onClick
 	addToCart : function()
 	{
-		App.cart.add( this.model );
+		App.cart.add(this.model);
 	}
 });
 
@@ -109,13 +109,16 @@ App.View.ItemsContainer = Backbone.View.extend(
 
 App.View.ShoppingCartItemView = Backbone.View.extend(
 {
-	tagName: 'tr',
+	tagName: 'div',
+	className:'list-group-item',
 	template : $('#template-shoppingCartItem').html(),
 
 	events :
 	{
-		'click.name' : 'remove',
-		'click.quantity' : 'manageQuantity'
+		'click .btnRemoveCartItem' : 'remove',
+		//'click .quantity' : 'manageQuantity'
+		'click .btnIncrementCartItem' : 'incrementQuantity',
+		'click .btnDecrementCartItem' : 'decrementQuantity'
 	},
 
 	initialize : function() {
@@ -135,17 +138,20 @@ App.View.ShoppingCartItemView = Backbone.View.extend(
 		return this;
 	},
 
-	manageQuantity : function( event )
+	incrementQuantity : function(event)
 	{
-		var type = $(event.target).data('type');
+		//var type = $(event.target).data('type');
+		this.model.quantity('increase');
+	},
 
-		if( this.model.get('quantity') === 1 && type === 'decrease' )
+	decrementQuantity : function(event)
+	{
+		if( this.model.get('quantity') === 1)
 		{
 			this.remove();
-		
 		} else
 		{
-			this.model.quantity(type);
+			this.model.quantity('decrease');
 		}
 	},
 
@@ -186,7 +192,7 @@ App.View.ShoppingCart = Backbone.View.extend(
 
 	defaultEmptyCartMessage : function()
 	{
-		this.$el.addClass('empty').html('<tr><td colspan="4">Cart is empty</td></tr>');
+		this.$el.addClass('empty').html('Cart is empty');
 	},
 
 	add : function( item )
@@ -214,9 +220,9 @@ App.View.ShoppingCart = Backbone.View.extend(
 	render : function()
 	{
 		this.$el.html('');
-		this.collection.each(function( item )
+		this.collection.each(function(item)
 		{
-			var newShoppingCardItem = new App.View.ShoppingCartItemView({ model : item });
+			var newShoppingCardItem = new App.View.ShoppingCartItemView({model:item});
 			this.$el.append(newShoppingCardItem.render().el);
 		}, this);
 	}
@@ -224,7 +230,7 @@ App.View.ShoppingCart = Backbone.View.extend(
 
 
 var itemList = [
-	{ title: 'Bacon', description: "Beschreibung", price: 2.99 },
+	{ title: 'Bacon', description: "Beschreibung doiohgofnipfnoifn", price: 2.99 },
 	{ title: 'Cabbage', description: "Beschreibung" },
 	{ title: 'Spinnach', description: "Beschreibung", price: 1.40 },
 	{ title: 'Salt', description: "Beschreibung", price: 0.88 },
