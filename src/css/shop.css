@@ -1,0 +1,37 @@
+body
+{
+    /* Because the fixed Navbar on top */
+    padding-top: 70px;
+}
+
+.itemInfos
+{
+    height: 130px;
+    overflow: hidden;
+}
+
+.itemInfos h4
+{
+    white-space: nowrap;
+}
+
+.thumbnail img
+{
+    width: 100%;
+}
+
+.thumbnail
+{
+    padding: 0;
+}
+
+.thumbnail .caption-full
+{
+    padding: 9px;
+    color: #333;
+}
+
+footer
+{
+    margin: 50px 0;
+}

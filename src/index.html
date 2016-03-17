@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Shop Homepage - Start Bootstrap Template</title>
+
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/shop.css" rel="stylesheet">
+
+    <script src="js/libs/jquery.js"></script>
+    <script src="js/libs/bootstrap.min.js"></script>
+    <script src="js/libs/underscore-min.js"></script>
+    <script src="js/libs/backbone-min.js"></script>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">Categorys</p>
+            <div class="list-group">
+                <a href="#" class="list-group-item">Food</a>
+                <a href="#" class="list-group-item">Sweets</a>
+                <a href="#" class="list-group-item">Drinks</a>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                <div class="wrap">
+                    <h2 id="basket-message">You have <span id="basket">0</span> items in your cart</h2>
+                    <!-- The Shop and the items -->
+                    <div id="shop-items-container"></div>
+                    <table id="shopping-cart">
+                        <tbody id="shopping-list"></tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="4" id="total">0.00</td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <hr>
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright &copy; Marcus Thöricht 2016</p>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<!-- Templates -->
+<script type="text/template" id="template-shoppingListItem">
+    <div class="thumbnail">
+        <img src="http://lorempixel.com/250/150/food/">
+        <div class="itemInfos">
+            <h4 class="price" class="pull-right"><%= price.toFixed(2)%> €</h4>
+            <h4 class="name"><%= title %></h4>
+            <p class="description"><%= description %></p>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="template-shoppingCartItem">
+    <td class="name"><%= title %></td>
+    <td class="quantity-total"><%= quantity %></td>
+    <td><a class="quantity" data-type="increase"><a class="quantity" data-type="decrease"></a> </a></td>
+    <td class="sub-total"><%= total.toFixed(2) %></td>
+</script>
+
+<script src="js/main.js"></script>
+</body>
+</html>
