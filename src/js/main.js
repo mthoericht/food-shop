@@ -134,7 +134,7 @@ App.View.ShoppingCartItemView = Backbone.View.extend(
 
 	render : function()
 	{
-		this.$el.html( _.template( this.template, this.model.toJSON() ));
+		this.$el.html( _.template(this.template, this.model.toJSON()));
 		return this;
 	},
 
@@ -146,7 +146,7 @@ App.View.ShoppingCartItemView = Backbone.View.extend(
 
 	decrementQuantity : function(event)
 	{
-		if( this.model.get('quantity') === 1)
+		if(this.model.get('quantity') === 1)
 		{
 			this.remove();
 		} else
@@ -163,7 +163,7 @@ App.View.ShoppingCartItemView = Backbone.View.extend(
 			$(this).remove();
 		});
 
-		App.cartItems.remove( this.model );
+		App.cartItems.remove(this.model);
 	}
 });
 
@@ -213,7 +213,7 @@ App.View.ShoppingCart = Backbone.View.extend(
 		});
 
 		this.basketTotal.html(basketTotal);
-		this.total.html(this.collection.subtotal());
+		this.total.html("Total: " + this.collection.subtotal() + " €");
 
 	},
 
@@ -230,12 +230,12 @@ App.View.ShoppingCart = Backbone.View.extend(
 
 
 var itemList = [
-	{ title: 'Bacon', description: "Beschreibung doiohgofnipfnoifn", price: 2.99 },
-	{ title: 'Cabbage', description: "Beschreibung" },
-	{ title: 'Spinnach', description: "Beschreibung", price: 1.40 },
-	{ title: 'Salt', description: "Beschreibung", price: 0.88 },
-	{ title: 'Bread', description: "Beschreibung" },
-	{ title: 'Butter', description: "Beschreibung", price : 1.99 }
+	{ title: 'Bacon', description: "Beschreibung doiohgofnipfnoifn", image:"http://lorempixel.com/250/150/food/2", price: 2.99 },
+	{ title: 'Cabbage', description: "Beschreibung", image:"http://lorempixel.com/250/150/food/3" },
+	{ title: 'Spinnach', description: "Beschreibung", image:"http://lorempixel.com/250/150/food/4", price: 1.40 },
+	{ title: 'Salt', description: "Beschreibung", image:"http://lorempixel.com/250/150/food/5", price: 0.88 },
+	{ title: 'Bread', description: "Beschreibung", image:"http://lorempixel.com/250/150/food/6" },
+	{ title: 'Butter', description: "Beschreibung", image:"http://lorempixel.com/250/150/food/7", price : 1.99 }
 ];
 
 
