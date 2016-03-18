@@ -38,6 +38,25 @@ App.Model.Item = Backbone.Model.extend(
 App.Collection.Items = Backbone.Collection.extend(
 {
 	models: App.Model.Item,
+	url: 'data/products.json',
+
+	parse: function(response)
+	{
+		return response.results;
+	},
+
+	// Sync method is overwritable for Same Origin Policy
+	/*sync: function(method, model, options) {
+		var that = this;
+		var params = _.extend({
+			type: 'GET',
+			dataType: 'json',
+			url: that.url,
+			processData: false
+		}, options);
+
+		return $.ajax(params);
+	},*/
 
 	subtotal : function()
 	{
@@ -93,12 +112,28 @@ App.View.ItemsContainer = Backbone.View.extend(
 
 	initialize: function()
 	{
-		this.render();
+		_.bindAll(this, 'render');
+
+		var that = this;
+
+		App.items.fetch(
+		{
+			success: function ()
+			{
+				for(var i in arguments[1])
+				{
+					App.items.add(new App.Model.Item(arguments[1][i]));
+					//console.log("TITLE: " + arguments[1][i].title);
+				}
+
+				that.render();
+			}
+		});
 	},
 
 	render: function()
 	{
-		this.collection.each(function( item )
+		this.collection.each(function(item)
 		{
 			var itemView = new App.View.Item({model: item});
 			this.$el.append(itemView.render().el);
@@ -116,7 +151,6 @@ App.View.ShoppingCartItemView = Backbone.View.extend(
 	events :
 	{
 		'click .btnRemoveCartItem' : 'remove',
-		//'click .quantity' : 'manageQuantity'
 		'click .btnIncrementCartItem' : 'incrementQuantity',
 		'click .btnDecrementCartItem' : 'decrementQuantity'
 	},
@@ -229,16 +263,7 @@ App.View.ShoppingCart = Backbone.View.extend(
 });
 
 
-var itemList = [
-	{ title: 'Bacon', description: "Beschreibung doiohgofnipfnoifn", image:"http://lorempixel.com/250/150/food/2", price: 2.99 },
-	{ title: 'Cabbage', description: "Beschreibung", image:"http://lorempixel.com/250/150/food/3" },
-	{ title: 'Spinnach', description: "Beschreibung", image:"http://lorempixel.com/250/150/food/4", price: 1.40 },
-	{ title: 'Salt', description: "Beschreibung", image:"http://lorempixel.com/250/150/food/5", price: 0.88 },
-	{ title: 'Bread', description: "Beschreibung", image:"http://lorempixel.com/250/150/food/6" },
-	{ title: 'Butter', description: "Beschreibung", image:"http://lorempixel.com/250/150/food/7", price : 1.99 }
-];
-
-
+// create a collection
 App.items = new App.Collection.Items();
 App.cartItems = new App.Collection.Items();
 
@@ -246,13 +271,7 @@ App.cartItems = new App.Collection.Items();
 App.cartItems.on('add', function( item )
 {
 	item.set('quantity',1);
-	
 });
-
-for(var i in itemList)
-{
-	App.items.add( new App.Model.Item(itemList[i]));
-}
 
 App.cart = new App.View.ShoppingCart();
 

@@ -1,0 +1,59 @@
+{
+  "products":[
+    {
+      "id": "bacon",
+      "category":"food",
+      "title": "Bacon",
+      "description": "Beschreibung Bacon",
+      "image":"http://lorempixel.com/250/150/food/1",
+      "price": "2.99"
+    },{
+      "id": "potatoes",
+      "category":"food",
+      "title": "Potatoes",
+      "description": "Beschreibung Potatoes",
+      "image":"http://lorempixel.com/250/150/food/2",
+      "price": "1.50"
+    },{
+      "id": "onions",
+      "category":"food",
+      "title": "Onions",
+      "description": "Beschreibung Onions",
+      "image":"http://lorempixel.com/250/150/food/3",
+      "price": "0.60"
+    },{
+      "id": "orangejuice",
+      "category":"drinks",
+      "title": "Orange Juice",
+      "description": "Beschreibung OrangeJucie",
+      "image":"http://lorempixel.com/250/150/food/4",
+      "price": "0.80"
+    },{
+      "id": "applejuice",
+      "category":"drinks",
+      "title": "Apple Juice",
+      "description": "Beschreibung AppleJuice",
+      "image":"http://lorempixel.com/250/150/food/5",
+      "price": "0.85"
+    }
+  ],
+  "categories":[
+    {
+      "id": "all",
+      "title": "All",
+      "description": "All Products"
+    },{
+      "id": "food",
+      "title": "Food",
+      "description": "Food Description"
+    },{
+      "id": "drinks",
+      "title": "Drinks",
+      "description": "Drinks Description"
+    },{
+      "id": "sweets",
+      "title": "Sweets",
+      "description": "Sweets Description"
+    }
+   ]
+}
