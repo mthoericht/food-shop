@@ -38,8 +38,11 @@ App.Model.Item = Backbone.Model.extend(
 App.Collection.Items = Backbone.Collection.extend(
 {
 	models: App.Model.Item,
+
+	//Path to external json (request on call fetch)
 	url: 'data/products.json',
 
+	//External jsons must be parse
 	parse: function(response)
 	{
 		return response.results;
@@ -142,6 +145,22 @@ App.View.ItemsContainer = Backbone.View.extend(
 });
 
 
+App.View.ItemsFilter = Backbone.View.extend(
+{
+	el: '#shop-items-filter',
+
+	initialize: function()
+	{
+		console.log("??");
+	},
+
+	render: function()
+	{
+
+	}
+});
+
+
 App.View.ShoppingCartItemView = Backbone.View.extend(
 {
 	tagName: 'div',
@@ -155,10 +174,11 @@ App.View.ShoppingCartItemView = Backbone.View.extend(
 		'click .btnDecrementCartItem' : 'decrementQuantity'
 	},
 
-	initialize : function() {
-		
+	initialize : function()
+	{
 		this.render();
 
+		//Re-Render on change
 		this.model.on('change', function()
 		{
 			this.render();
@@ -263,21 +283,22 @@ App.View.ShoppingCart = Backbone.View.extend(
 });
 
 
-// create a collection
+// create the collections
 App.items = new App.Collection.Items();
 App.cartItems = new App.Collection.Items();
 
 // external listener
 App.cartItems.on('add', function( item )
 {
-	item.set('quantity',1);
+	item.set('quantity', 1);
 });
 
+//Create the cart
 App.cart = new App.View.ShoppingCart();
+App.filter = new App.View.ItemsFilter();
 
 //on Start
 $(function()
 {
 	App.itemList = new App.View.ItemsContainer({collection:App.items});
 });
-
